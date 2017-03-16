@@ -1,1 +1,8 @@
-hieradata/nodes/example-puppet-master.yaml
+target/*
+.settings/*
+.classpath
+.project
+.idea
+*.iml
+*.eml
+/target

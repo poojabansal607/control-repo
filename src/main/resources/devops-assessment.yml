@@ -1,0 +1,24 @@
+template: Hello, %s!
+defaultName: Stranger
+
+server:
+  applicationConnectors:
+  - type: http 
+    port: 8087
+  adminConnectors:
+  - type: http
+    port: 8088
+
+
+database:
+  # the name of your JDBC driver
+  driverClass: com.mysql.jdbc.Driver
+  # the username
+  user: root1
+  # the password
+  password: root
+  # the JDBC URL
+  url: jdbc:mysql://10.207.62.136:3306/devops_db
+  validationQuery: "SELECT 1 from category"
+
+

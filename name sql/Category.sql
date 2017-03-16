@@ -1,0 +1,14 @@
+insert into category (rootid, name) select id, 'Continuous Integration' from root_area where name = 'Continous Delivery';
+insert into category (rootid, name) select id, 'Testing' from root_area where name = 'Continous Delivery';
+insert into category (rootid, name) select id, 'Project / Release Management' from root_area where name = 'Continous Delivery';
+insert into category (rootid, name) select id, 'Database' from root_area where name = 'Continous Delivery';
+insert into category (rootid, name) select id, 'Pipeline Agility' from root_area where name = 'Continous Delivery';
+insert into category (rootid, name) select id, 'Infrastructure As Code' from root_area where name = 'Infrastructure On Demand';
+insert into category (rootid, name) select id, 'Version Control - Code' from root_area where name = 'Infrastructure On Demand';
+insert into category (rootid, name) select id, 'Monitoring & Alerts' from root_area where name = 'Infrastructure On Demand';
+insert into category (rootid, name) select id, 'Project Management & Support Management' from root_area where name = 'Culture';
+insert into category (rootid, name) select id, 'Release Management' from root_area where name = 'Culture';
+insert into category (rootid, name) select id, 'DevOps Metrics' from root_area where name = 'Culture';
+insert into category (rootid, name) select id, 'Architecture' from root_area where name = 'Micro Services';
+insert into category (rootid, name) select id, 'Deployment' from root_area where name = 'Micro Services';
+insert into category (rootid, name) select id, 'Fault and Resource isolation' from root_area where name = 'Micro Services';
