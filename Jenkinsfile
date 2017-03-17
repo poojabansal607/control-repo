@@ -17,7 +17,7 @@ stage 'Build'
 	   def var1 = /var/lib/jenkins/jobs/assessment/lastSuccessful/archive/target
 	   def var2 = /etc/puppetlabs/puppet/deploy_files/assessment/target/
 	  
-	  sh "scp $(var1)/assessment-1.0-SNAPSHOT.jar root@del2vmpldevop02.sapient.com:$(var2)"
+	  sh "scp ${var1}/assessment-1.0-SNAPSHOT.jar root@del2vmpldevop02.sapient.com:${var2}"
 	  
 		
 //stage 'Deploy to QA'
