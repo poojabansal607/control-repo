@@ -14,8 +14,8 @@ stage 'Build'
 	   def workspace = pwd()
        echo "workspace=${workspace}"
 	  
-	  scp /var/lib/jenkins/jobs/assessment/lastSuccessful/archive/target/assessment-1.0-SNAPSHOT.jar
-	  root@del2vmpldevop02.sapient.com:/etc/puppetlabs/puppet/deploy_files/assessment/target/
+	  sh "scp /var/lib/jenkins/jobs/assessment/lastSuccessful/archive/target/assessment-1.0-SNAPSHOT.jar
+	  root@del2vmpldevop02.sapient.com:/etc/puppetlabs/puppet/deploy_files/assessment/target/"
 	  
 		
 //stage 'Deploy to QA'
