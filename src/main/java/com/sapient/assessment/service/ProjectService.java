@@ -9,7 +9,7 @@ import com.sapient.assessment.data.client.ProjectDetailsFormatted;
 
 public interface ProjectService {
 
-    void saveProjectDetails(NewProject newProject);
+   Project saveProjectDetails(NewProject newProject);
 
     void updateProjectDetails(List<ProjectDetails> projectDetails, long projectId);
 

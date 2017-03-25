@@ -3,7 +3,7 @@ package com.sapient.assessment.resources;
 import com.codahale.metrics.annotation.Timed;
 import com.sapient.assessment.data.assessments.ResponseAssessment;
 import com.sapient.assessment.data.assessments.SubCatAssessment;
-
+import com.sapient.assessment.data.client.Project;
 import com.sapient.assessment.data.reference.RootArea;
 import com.sapient.assessment.data.reference.SubCategory;
 import com.sapient.assessment.service.AssessmentService;
@@ -37,16 +37,16 @@ public class AssessmentResource {
     	//assessmentService.beginAssessment(project_key);
         return assessmentService.getAssessmentData(project_key);
     }
-    
+
     @Path("/save")
     @Consumes(MediaType.APPLICATION_JSON)
      @POST
      @Timed
-     public boolean save(ResponseAssessment response)
+     public Project save(ResponseAssessment response)
      {
-     	//System.out.println(questions);
-     	assessmentService.saveAssessmentData(response);
-     	return true;
+
+     	return assessmentService.saveAssessmentData(response);
+
      }
-    
+
 }

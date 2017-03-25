@@ -18,8 +18,8 @@ public interface ClientDao {
     @SqlQuery("select id, name,username,password from client")
     @Mapper(ClientMapper.class)
     List<Client> getAll();
-    
-    
+
+
     @SqlQuery("select c.id,c.name, c.username, c.password, c.email from client_details as c WHERE c.username= :Username AND c.password= :Password")
 	@Mapper(ClientMapper.class)
 	Client getClientDetails(@Bind("Username")String username,@Bind("Password")String password);

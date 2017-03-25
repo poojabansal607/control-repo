@@ -6,4 +6,5 @@ public interface RegisterService {
 long checkUserName(String username);
 long checkClientName(String name);
 void saveClientDetails(String clientName,String userName,String password,String email);
+long checkEmailId(String name);
 }

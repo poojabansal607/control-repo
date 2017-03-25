@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.sapient.assessment.dao.ProjectDAO;
 import com.sapient.assessment.data.client.NewProject;
+import com.sapient.assessment.data.client.Project;
 import com.sapient.assessment.data.client.ProjectDetails;
 import com.sapient.assessment.data.client.ProjectDetailsFormatted;
 import com.sapient.assessment.data.client.ProjectSubAttribute;
@@ -19,7 +20,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	//Check batch insert
-	public void saveProjectDetails(NewProject newProject) {
+	public Project saveProjectDetails(NewProject newProject) {
 		String applicationName = null;
 
 		for (ProjectDetails project : newProject.getProjectDetails()) {
@@ -37,7 +38,8 @@ public class ProjectServiceImpl implements ProjectService {
 					project.getSubAttributeValue());
 
 		}
-
+		long testId = projectDAO.getassessmentIdofProject(projectId);
+		return new Project (projectId,testId,applicationName);
 	}
 
 	/**
@@ -99,6 +101,6 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectDAO.getProjectDetails(projectId);
 	}
 
-	
+
 
 }

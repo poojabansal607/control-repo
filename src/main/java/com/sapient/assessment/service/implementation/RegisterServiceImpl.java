@@ -28,6 +28,11 @@ public class RegisterServiceImpl implements RegisterService{
 
 
 		 registerDAO.saveClient(clientName, userName, password,email);
-		
+
+	}
+
+	public long checkEmailId(String emailId) {
+		long existEmailid=registerDAO.getemail(emailId);
+		return existEmailid;
 	}
 }

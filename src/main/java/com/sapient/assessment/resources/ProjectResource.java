@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.codahale.metrics.annotation.Timed;
 import com.sapient.assessment.data.client.NewProject;
+import com.sapient.assessment.data.client.Project;
 import com.sapient.assessment.data.client.ProjectDetails;
 import com.sapient.assessment.data.client.ProjectDetailsFormatted;
 import com.sapient.assessment.service.ProjectService;
@@ -41,11 +42,11 @@ public class ProjectResource {
     @Path("/AddProject")
     @POST
     @Timed
-    public boolean addProject(NewProject newProject) {
+    public Project addProject(NewProject newProject) {
 
-        projectService.saveProjectDetails(newProject);
+       return projectService.saveProjectDetails(newProject);
 
-        return true;
+       
     }
 
     @Path("/UpdateProject")

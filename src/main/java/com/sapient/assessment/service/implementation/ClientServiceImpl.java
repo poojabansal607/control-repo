@@ -17,7 +17,8 @@ public class ClientServiceImpl implements ClientService {
 
     public ClientServiceImpl(ClientDao dao) {
 
-        this.dao = dao;
+
+    	this.dao = dao;
     }
 
     public List<Client> getClients(String name) {

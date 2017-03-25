@@ -36,22 +36,22 @@ public class LoginServiceImpl implements LoginService {
 	public List<Project> getProjectData(Client client) {
 		// List of all projects for the client
 		List<Project> projects = new ArrayList<Project>();
-		
+
 		// Get id's of all the project for the respective clientID
 		List<Long> listOfProjectId = loginDAO.getListofProjects(client.getClientKey().getId());
 
-		// Get Details of all the projects by iterating through the list and consolidating the data 
-		
-		
+		// Get Details of all the projects by iterating through the list and consolidating the data
+
+
 		//Consolidate details of every project one at a time
-		for (Long projectId : listOfProjectId) {			
+		for (Long projectId : listOfProjectId) {
 			//Get the assessment ID of the project if it exists
 			long testId = loginDAO.getassessmentIdofProject(projectId);
-			
+
 			//Get the project name
 			String projectName = loginDAO.getProjectName(projectId);
-			
-			
+
+
 			//Create the Final Project Object and add to the List of Projects of the Client
 			Project project = new Project(projectId, testId,projectName);
 			projects.add(project);

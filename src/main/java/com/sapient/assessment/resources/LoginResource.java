@@ -10,8 +10,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.codahale.metrics.annotation.Timed;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sapient.assessment.data.client.Client;
 import com.sapient.assessment.data.client.ClientKey;
 import com.sapient.assessment.data.client.ProjectKey;

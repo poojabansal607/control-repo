@@ -42,7 +42,7 @@ public class DevOpsAssessmentApplication extends Application<DevOpsAssessmentCon
         new DevOpsAssessmentApplication().run(args);
     }
 
-   
+
     @Override
     public void run(DevOpsAssessmentConfiguration configuration, Environment environment) throws Exception {
         final DevopsAssessmentResource resource = getDevopsAssessmentResource(configuration);
@@ -80,41 +80,44 @@ public class DevOpsAssessmentApplication extends Application<DevOpsAssessmentCon
     }
     private AssessmentResource getAssessmentResource(DBI jdbi) {
         final AssessmentDao assessmentDao = jdbi.onDemand(AssessmentDao.class);
-        return new AssessmentResource(new AssessmentServiceImpl(assessmentDao));
+        final ProjectDAO projectDao = jdbi.onDemand(ProjectDAO.class);
+        return new AssessmentResource(new AssessmentServiceImpl(assessmentDao, projectDao));
     }
-    
+
     //New Method
-    
+
     private NewRootAreaResource getNewRootAreaResource(DBI jdbi) {
         final AssessmentDao assessmentDao = jdbi.onDemand(AssessmentDao.class);
-        return new  NewRootAreaResource(new AssessmentServiceImpl(assessmentDao));
+        final ProjectDAO projectDao = jdbi.onDemand(ProjectDAO.class);
+        return new  NewRootAreaResource(new AssessmentServiceImpl(assessmentDao, projectDao));
     }
-    
+
     //New Method for question of subcategory
     private QuestionSubCategory  getQuestionSubCategory (DBI jdbi) {
         final AssessmentDao assessmentDao = jdbi.onDemand(AssessmentDao.class);
-        return new  QuestionSubCategory(new AssessmentServiceImpl(assessmentDao));
+        final ProjectDAO projectDao = jdbi.onDemand(ProjectDAO.class);
+        return new  QuestionSubCategory(new AssessmentServiceImpl(assessmentDao, projectDao));
     }
-    
+
     //New Method for Login Verification
     private LoginResource getLogin(DBI jdbi){
     	final LoginDAO logindao = jdbi.onDemand(LoginDAO.class);
     	final ClientDao clientdao = jdbi.onDemand(ClientDao.class);
-    	
+
     	return new LoginResource(new LoginServiceImpl(logindao,clientdao));
-    	
-    	
+
+
     }
     private Register getRegister(DBI jdbi) {
         final RegisterDAO registerdao = jdbi.onDemand(RegisterDAO.class);
         return new Register(new RegisterServiceImpl(registerdao));
     }
-    
+
     private ProjectResource getProjectResource(DBI jdbi){
     	final ProjectDAO projectDao = jdbi.onDemand(ProjectDAO.class);
     			return new ProjectResource (new ProjectServiceImpl(projectDao));
     }
-    
+
 
     private DevopsAssessmentResource getDevopsAssessmentResource(DevOpsAssessmentConfiguration configuration) {
         return new DevopsAssessmentResource(
@@ -125,7 +128,7 @@ public class DevOpsAssessmentApplication extends Application<DevOpsAssessmentCon
 
     @Override
     public void initialize(Bootstrap<DevOpsAssessmentConfiguration> bootstrap) {
-    	
+
     }
 
 

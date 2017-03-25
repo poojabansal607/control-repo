@@ -2,8 +2,10 @@ package com.sapient.assessment.service.implementation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sapient.assessment.dao.AssessmentDao;
+import com.sapient.assessment.dao.ProjectDAO;
 import com.sapient.assessment.data.assessments.ResponseAssessment;
 import com.sapient.assessment.data.assessments.SubCatAssessment;
+import com.sapient.assessment.data.client.Project;
 import com.sapient.assessment.data.reference.*;
 import com.sapient.assessment.service.AssessmentService;
 
@@ -16,9 +18,11 @@ import java.util.List;
  */
 public class AssessmentServiceImpl implements AssessmentService {
 	private final AssessmentDao assessmentDao;
+	private final ProjectDAO projectDao;
 
-	public AssessmentServiceImpl(AssessmentDao assessmentDao) {
+	public AssessmentServiceImpl(AssessmentDao assessmentDao, ProjectDAO projectDao) {
 		this.assessmentDao = assessmentDao;
+		this.projectDao =    projectDao;
 	}
 
 	public List<RootArea> getAssessmentData(long project_key) {
@@ -32,7 +36,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 		return updateWithCategories(rootAreas);
 	}
 
-	public void saveAssessmentData(ResponseAssessment response) {
+	public Project saveAssessmentData(ResponseAssessment response) {
 
 		// fetch testId for a assessment
 		long testId = assessmentDao.getTestId(response.getProjectId());
@@ -58,23 +62,20 @@ public class AssessmentServiceImpl implements AssessmentService {
 			assessmentDao.saveMaturityLevel(testId, subcat.getId(), subcat.getMaturityLevel());
 
 			// saving the response details per subCategoty wise,
-			// only metadata regarding a selected question will be saved,
-			// questionId itself would be stored in another table
 
 			for (Long ques : subcat.getCheckedQuestion()) {
 				assessmentDao.saveResponseDetails(testId, subcat.getId(), ques);
-				// Fetching the response id against which the previous metadata
-				// was saved
 
-				long responseId = assessmentDao.getUniqueResponseDetails(testId, subcat.getId());
-
-				assessmentDao.saveResponseValues(responseId, ques);
 
 			}
 
 		}
-
 		// All the question id are now saved
+
+		String projectName = projectDao.getProjectName(response.getProjectId());
+		Project projectSaved = new Project(response.getProjectId(),testId,projectName);
+		return projectSaved;
+
 
 	}
 
@@ -98,10 +99,8 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 			return updatedSubCategoryList;
 		} else {
-
-			System.out.println("Inside checked question");
-			List<Question> checkedQuestions = assessmentDao.getCheckedQuestion(project_key);
 			for (SubCategory subCategory : subCategories) {
+				List<Question> checkedQuestions = assessmentDao.getCheckedQuestionSubCat(project_key,subCategory.getSubCategoryKey().getId());
 				List<Question> questions = getQuestions(subCategory.getSubCategoryKey());
 				for (Question ques : checkedQuestions) {
 					if (questions.contains(ques)) {
@@ -183,13 +182,9 @@ public class AssessmentServiceImpl implements AssessmentService {
 		// Fetch all the responseID's for a particular test
 		List<Long> responseID = assessmentDao.getresponseDetails(testId);
 
-		// Delete questions for every responseId from the response_value table,
-		// delete from response_value first because of foreign key constraint
-		for (Long responseId : responseID) {
-			assessmentDao.deleteSelectedQuestions(responseId);
-		}
 
-		// After Deletion from response_value, delete data from response_details
+
+		// Delete data from response_details
 		assessmentDao.deleteresponseDetails(testId);
 
 		// Delete maturity_level for the subCategory

@@ -2,6 +2,7 @@ package com.sapient.assessment.service;
 
 import com.sapient.assessment.data.assessments.ResponseAssessment;
 import com.sapient.assessment.data.client.Client;
+import com.sapient.assessment.data.client.Project;
 import com.sapient.assessment.data.reference.Question;
 import com.sapient.assessment.data.reference.RootArea;
 
@@ -12,8 +13,8 @@ import java.util.List;
  */
 public interface AssessmentService {
     List<RootArea> getAssessmentData(long project_key);
-    
-       void saveAssessmentData(ResponseAssessment response);
+
+       Project saveAssessmentData(ResponseAssessment response);
 
 	RootArea getAssessmentDataByRootArea(String string);
 	List<Question> getQuestionBySubCat(long project_id, String subcat_name);
